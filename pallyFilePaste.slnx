@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="pallyFilePaste.Android/pallyFilePaste.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj" />
+  <Project Path="pallyFilePaste/pallyFilePaste.csproj" />
+</Solution>
