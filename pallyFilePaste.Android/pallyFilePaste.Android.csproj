@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <AndroidResource Include="Icon.png">
+    <AndroidResource Include="icon.png">
       <Link>Resources\drawable\Icon.png</Link>
     </AndroidResource>
   </ItemGroup>
