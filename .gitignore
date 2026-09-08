@@ -433,3 +433,4 @@ FodyWeavers.xsd
 
 # misc
 *.keystore
+.ignore
