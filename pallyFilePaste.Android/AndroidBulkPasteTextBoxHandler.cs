@@ -44,9 +44,21 @@ public static class AndroidBulkPasteTextBoxHandler
         editText.SetSingleLine(false);
         editText.SetMinLines(8);
         editText.Gravity = GravityFlags.Top;
-        editText.SetPadding(20, 20, 20, 20);
-        editText.Hint =
-            "Tap here to focus & paste from clipboard...";
+    
+        // 1. Scale padding dynamically for real phone screens
+        var density = context?.Resources?.DisplayMetrics?.Density ?? 1f;
+        int p = (int)(15 * density);
+        editText.SetPadding(p, p, p, p);
+    
+        // 2. Remove Android's default background to stop the visual flashing
+        editText.SetBackgroundColor(global::Android.Graphics.Color.Transparent);
+
+        // 3. Set Hint and enforce text size
+        editText.Hint = "Tap here to focus & paste from clipboard...";
+        editText.SetTextSize(global::Android.Util.ComplexUnitType.Sp, 16f);
+
+        editText.SetTextColor(global::Android.Graphics.Color.Black);
+        editText.SetHintTextColor(global::Android.Graphics.Color.DarkGray);
 
         editText.TextChanged += (_, e) =>
         {

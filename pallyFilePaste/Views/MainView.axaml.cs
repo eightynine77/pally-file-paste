@@ -192,7 +192,7 @@ public partial class MainView : UserControl
                 var bitmaps = BulkImages.Where(b => b.Image != null).Select(b => b.Image!).ToList();
                 await NativeAndroidSaver.SaveImagesAsync(bitmaps);
 
-                BulkStatusText.Text = $"Success! Saved {bitmaps.Count} images.";
+                BulkStatusText.Text = $"Success! Saved {bitmaps.Count} images to Pictures/pallyFilePaste";
                 BulkStatusText.Foreground = Brushes.Green;
                 BulkImages.Clear();
             }

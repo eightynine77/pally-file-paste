@@ -30,6 +30,7 @@
             <TextBlock x:Name="SingleStatusText"
                        Text="[status message]"
                        Foreground="Red"
+                       TextWrapping="Wrap"
                        IsVisible="False"/>
 
             <TextBlock Text="paste in bulk" 
@@ -58,7 +59,11 @@
 
                 <!-- Android native bulk input -->
                 <Border Grid.Row="0"
-                        IsVisible="{OnPlatform Default=False, Android=True}">
+                        IsVisible="{OnPlatform Default=False, Android=True}"
+                        Background="White"
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        CornerRadius="4">
                     <androidcontrols:AndroidBulkPasteTextBox
                         x:Name="AndroidBulkPasteHost"
                         MinHeight="200"/>
@@ -66,14 +71,16 @@
 
                 <!-- Pasted image display -->
                 <ListBox x:Name="BulkPasteListBox"
-                         Grid.Row="1"
-                         MaxHeight="180"
-                         Margin="4"
-                         ScrollViewer.IsScrollChainingEnabled="True"
-                         Background="Transparent"
-                         BorderThickness="0"
-                         ScrollViewer.VerticalScrollBarVisibility="Auto"
-                         PointerPressed="BulkPasteListBox_PointerPressed">
+                     Grid.Row="1"
+                     MaxHeight="180"
+                     Margin="4"
+                     ScrollViewer.IsScrollChainingEnabled="True"
+                     Background="Transparent"
+                     BorderThickness="2"
+                     BorderBrush="#03AC13"
+                     CornerRadius="4"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     PointerPressed="BulkPasteListBox_PointerPressed">
 
                     <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="views:MainView+PastedImage">
@@ -102,6 +109,7 @@
                            Grid.Column="0"
                            Text="[status message]"
                            Foreground="Red"
+                           TextWrapping="Wrap"
                            VerticalAlignment="Center"
                            IsVisible="False"/>
                 
