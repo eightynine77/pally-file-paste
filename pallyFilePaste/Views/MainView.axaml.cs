@@ -1,5 +1,7 @@
 using System;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Platform;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
 using System.Collections.ObjectModel;
@@ -142,6 +144,49 @@ public partial class MainView : UserControl
         {
             await Dispatcher.UIThread.InvokeAsync(Add);
         }
+    }
+
+    private void HamburgerButton_Click(object? sender, RoutedEventArgs e)
+    {
+        // Toggles the menu open and closed
+        NavSplitView.IsPaneOpen = !NavSplitView.IsPaneOpen;
+    }
+
+    private void NavSplitView_PaneOpening(
+        object? sender,
+        CancelRoutedEventArgs e)
+    {
+        if (!OperatingSystem.IsAndroid())
+            return;
+
+        var paneWidth = NavSplitView.OpenPaneLength;
+
+        // Native Android views cannot be layered beneath Avalonia content.
+        // Offset the entire content layout (without reducing its width) so the
+        // native EditText moves clear of the overlay drawer.
+        MainContentGrid.Margin = new Thickness(paneWidth, 0, -paneWidth, 0);
+    }
+
+    private void NavSplitView_PaneClosing(
+        object? sender,
+        CancelRoutedEventArgs e)
+    {
+        if (OperatingSystem.IsAndroid())
+            MainContentGrid.Margin = default;
+    }
+
+    private void NavHome_Click(object? sender, RoutedEventArgs e)
+    {
+        NavSplitView.IsPaneOpen = false;
+        HomeContentView.IsVisible = true;
+        AboutContentView.IsVisible = false;
+    }
+
+    private void NavAbout_Click(object? sender, RoutedEventArgs e)
+    {
+        NavSplitView.IsPaneOpen = false;
+        HomeContentView.IsVisible = false;
+        AboutContentView.IsVisible = true;
     }
 
     private async Task AddImageFromClipboardAsync()

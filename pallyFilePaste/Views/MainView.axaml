@@ -12,115 +12,157 @@
         <vm:MainViewModel />
     </Design.DataContext>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="20" Spacing="15">
-            
-            <Button x:Name="SinglePasteButton"
-                    HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    VerticalContentAlignment="Center"
-                    Height="150"
-                    Click="SinglePasteButton_Click">
-                <TextBlock Text="click here to paste into image"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           FontSize="24" />
-            </Button>
-            
-            <TextBlock x:Name="SingleStatusText"
-                       Text="[status message]"
-                       Foreground="Red"
-                       TextWrapping="Wrap"
-                       IsVisible="False"/>
-
-            <TextBlock Text="paste in bulk" 
-                       FontSize="16"
-                       TextWrapping="Wrap"
-                       Margin="0, 20, 0, 0"/>
-            
-            <Grid MinHeight="200"
-                  RowDefinitions="200,180">
-
-                <!-- Desktop/Linux/Windows bulk input -->
-                <Border Grid.Row="0"
-                        IsVisible="{OnPlatform Default=True, Android=False}">
-                    <TextBox x:Name="BulkPasteTextBox"
-                             MinHeight="200"
-                             PlaceholderText="Tap here to focus &amp; paste from clipboard..."
-                             PastingFromClipboard="BulkPasteTextBox_PastingFromClipboard"
-                             TextChanged="BulkPasteTextBox_TextChanged"
-                             AcceptsReturn="True"
-                             TextWrapping="Wrap"
-                             VerticalContentAlignment="Top"
-                             BorderThickness="1"
-                             BorderBrush="Gray"
-                             CornerRadius="4"/>
-                </Border>
-
-                <!-- Android native bulk input -->
-                <Border Grid.Row="0"
-                        IsVisible="{OnPlatform Default=False, Android=True}"
-                        Background="White"
-                        BorderBrush="Gray"
-                        BorderThickness="1"
-                        CornerRadius="4">
-                    <androidcontrols:AndroidBulkPasteTextBox
-                        x:Name="AndroidBulkPasteHost"
-                        MinHeight="200"/>
-                </Border>
-
-                <!-- Pasted image display -->
-                <ListBox x:Name="BulkPasteListBox"
-                     Grid.Row="1"
-                     MaxHeight="180"
-                     Margin="4"
-                     ScrollViewer.IsScrollChainingEnabled="True"
-                     Background="Transparent"
-                     BorderThickness="2"
-                     BorderBrush="#03AC13"
-                     CornerRadius="4"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                     PointerPressed="BulkPasteListBox_PointerPressed">
-
-                    <ListBox.ItemTemplate>
-                        <DataTemplate x:DataType="views:MainView+PastedImage">
-                            <StackPanel Orientation="Horizontal"
-                                        Spacing="10"
-                                        VerticalAlignment="Center"
-                                        Margin="4">
-
-                                <Image Source="{Binding Image}"
-                                       Width="40"
-                                       Height="40"
-                                       Stretch="UniformToFill"/>
-
-                                <TextBlock Text="{Binding FileName}"
-                                           VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-
-                </ListBox>
-
-            </Grid>
-            <Grid ColumnDefinitions="*, Auto">
+    <SplitView x:Name="NavSplitView" 
+               IsPaneOpen="False" 
+               DisplayMode="Overlay"
+               OpenPaneLength="200"
+               PaneOpening="NavSplitView_PaneOpening"
+               PaneClosing="NavSplitView_PaneClosing">
+        
+        <!-- The Navigation Menu -->
+        <SplitView.Pane>
+            <StackPanel Spacing="10" Margin="10">
+                <TextBlock Text="Menu" FontWeight="Bold" FontSize="20" Margin="0,10,0,20"/>
+                <Button Content="Home" 
+                        HorizontalAlignment="Stretch" 
+                        Click="NavHome_Click"/>
+                <Button Content="About" 
+                        HorizontalAlignment="Stretch" 
+                        Click="NavAbout_Click"/>
+            </StackPanel>
+        </SplitView.Pane>
+        
+        <!-- The Main Content -->
+        <SplitView.Content>
+            <Grid x:Name="MainContentGrid" RowDefinitions="Auto,*">
                 
-                <TextBlock x:Name="BulkStatusText"
-                           Grid.Column="0"
-                           Text="[status message]"
-                           Foreground="Red"
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Center"
-                           IsVisible="False"/>
-                
-                <Button x:Name="BulkSaveButton"
-                        Grid.Column="1"
-                        Content="save"
-                        Width="100"
-                        HorizontalContentAlignment="Center"
-                        Click="BulkSaveButton_Click"/>
+                <!-- Hamburger Button Header -->
+                <Button Grid.Row="0" 
+                        Content="☰" 
+                        FontSize="24" 
+                        Width="45" 
+                        Height="45" 
+                        Background="Transparent" 
+                        Click="HamburgerButton_Click" 
+                        Margin="5"/>
+
+                <!-- Your Existing Content -->
+                <ScrollViewer x:Name="HomeContentView"
+                      Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto">
+                    
+                    <StackPanel Margin="20" Spacing="15">
+                        
+                        <Button x:Name="SinglePasteButton"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                Height="150"
+                                Click="SinglePasteButton_Click">
+                            <TextBlock Text="click here to paste into image"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       FontSize="24" />
+                        </Button>
+                        
+                        <TextBlock x:Name="SingleStatusText"
+                                   Text="[status message]"
+                                   Foreground="Red"
+                                   TextWrapping="Wrap"
+                                   IsVisible="False"/>
+
+                        <TextBlock Text="paste in bulk" 
+                                   FontSize="16"
+                                   TextWrapping="Wrap"
+                                   Margin="0, 20, 0, 0"/>
+                        
+                        <Grid MinHeight="200"
+                              RowDefinitions="200,180">
+
+                            <!-- Desktop/Linux/Windows bulk input -->
+                            <Border Grid.Row="0"
+                                    IsVisible="{OnPlatform Default=True, Android=False}">
+                                <TextBox x:Name="BulkPasteTextBox"
+                                         MinHeight="200"
+                                         PlaceholderText="Tap here to focus &amp; paste from clipboard..."
+                                         PastingFromClipboard="BulkPasteTextBox_PastingFromClipboard"
+                                         TextChanged="BulkPasteTextBox_TextChanged"
+                                         AcceptsReturn="True"
+                                         TextWrapping="Wrap"
+                                         VerticalContentAlignment="Top"
+                                         BorderThickness="1"
+                                         BorderBrush="Gray"
+                                         CornerRadius="4"/>
+                            </Border>
+
+                            <!-- Android native bulk input -->
+                            <Border Grid.Row="0"
+                                    IsVisible="{OnPlatform Default=False, Android=True}"
+                                    Background="White"
+                                    BorderBrush="Gray"
+                                    BorderThickness="1"
+                                    CornerRadius="4">
+                                <androidcontrols:AndroidBulkPasteTextBox
+                                    x:Name="AndroidBulkPasteHost"
+                                    MinHeight="200"/>
+                            </Border>
+
+                            <!-- Pasted image display -->
+                            <ListBox x:Name="BulkPasteListBox"
+                                 Grid.Row="1"
+                                 MaxHeight="180"
+                                 Margin="4"
+                                 ScrollViewer.IsScrollChainingEnabled="True"
+                                 Background="Transparent"
+                                 BorderThickness="2"
+                                 BorderBrush="#03AC13"
+                                 CornerRadius="4"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                 PointerPressed="BulkPasteListBox_PointerPressed">
+
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="views:MainView+PastedImage">
+                                        <StackPanel Orientation="Horizontal"
+                                                    Spacing="10"
+                                                    VerticalAlignment="Center"
+                                                    Margin="4">
+
+                                            <Image Source="{Binding Image}"
+                                                   Width="40"
+                                                   Height="40"
+                                                   Stretch="UniformToFill"/>
+
+                                            <TextBlock Text="{Binding FileName}"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+
+                            </ListBox>
+
+                        </Grid>
+                        <Grid ColumnDefinitions="*, Auto">
+                            
+                            <TextBlock x:Name="BulkStatusText"
+                                       Grid.Column="0"
+                                       Text="[status message]"
+                                       Foreground="Red"
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center"
+                                       IsVisible="False"/>
+                            
+                            <Button x:Name="BulkSaveButton"
+                                    Grid.Column="1"
+                                    Content="save"
+                                    Width="100"
+                                    HorizontalContentAlignment="Center"
+                                    Click="BulkSaveButton_Click"/>
+                        </Grid>
+                    </StackPanel>
+
+                </ScrollViewer>
+                <views:AboutPage x:Name="AboutContentView" Grid.Row="1" IsVisible="False"/>
             </Grid>
-            
-        </StackPanel>
-    </ScrollViewer>
+        </SplitView.Content>
+    </SplitView>
 </UserControl>
