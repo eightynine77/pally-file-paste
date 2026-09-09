@@ -101,6 +101,11 @@ public static class AndroidBulkPasteTextBoxHandler
                     {
                         return;
                     }
+
+                    // Back hides the IME without clearing this native view's
+                    // focus. A later tap therefore does not cause Android to
+                    // show the keyboard automatically, so request it here.
+                    imm.ShowSoftInput(this, ShowFlags.Implicit);
                 });
             }
 

@@ -23,11 +23,19 @@
         <SplitView.Pane>
             <StackPanel Spacing="10" Margin="10">
                 <TextBlock Text="Menu" FontWeight="Bold" FontSize="20" Margin="0,10,0,20"/>
-                <Button Content="Home" 
+    
+                <Button x:Name="NavHomeButton"
+                        Content="Home" 
                         HorizontalAlignment="Stretch" 
+                        Background="LightGray"
+                        FontSize="18"
                         Click="NavHome_Click"/>
-                <Button Content="About" 
+            
+                <Button x:Name="NavAboutButton"
+                        Content="About" 
+                        FontSize="18"
                         HorizontalAlignment="Stretch" 
+                        Background="Transparent"
                         Click="NavAbout_Click"/>
             </StackPanel>
         </SplitView.Pane>
@@ -94,7 +102,7 @@
                                          BorderBrush="Gray"
                                          CornerRadius="4"/>
                             </Border>
-
+                            
                             <!-- Android native bulk input -->
                             <Border Grid.Row="0"
                                     IsVisible="{OnPlatform Default=False, Android=True}"

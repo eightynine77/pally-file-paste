@@ -180,6 +180,8 @@ public partial class MainView : UserControl
         NavSplitView.IsPaneOpen = false;
         HomeContentView.IsVisible = true;
         AboutContentView.IsVisible = false;
+        NavHomeButton.Background = Brushes.LightGray;
+        NavAboutButton.Background = Brushes.Transparent;
     }
 
     private void NavAbout_Click(object? sender, RoutedEventArgs e)
@@ -187,6 +189,8 @@ public partial class MainView : UserControl
         NavSplitView.IsPaneOpen = false;
         HomeContentView.IsVisible = false;
         AboutContentView.IsVisible = true;
+        NavHomeButton.Background = Brushes.Transparent;
+        NavAboutButton.Background = Brushes.LightGray;
     }
 
     private async Task AddImageFromClipboardAsync()
