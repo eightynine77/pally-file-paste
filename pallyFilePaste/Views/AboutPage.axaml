@@ -24,7 +24,7 @@
                              BorderThickness="0"
                              FontSize="18"
                              Cursor="Hand"
-                             HorizontalAlignment="Stretch"
+                             HorizontalAlignment="Center"
                              HorizontalContentAlignment="Center">
                 <TextBlock Text="made by eightynine77 with love."
                            TextWrapping="Wrap"
