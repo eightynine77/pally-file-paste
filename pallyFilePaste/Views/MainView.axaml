@@ -80,7 +80,7 @@
                                    IsVisible="False"/>
 
                         <TextBlock Text="paste in bulk" 
-                                   FontSize="16"
+                                   FontSize="18"
                                    TextWrapping="Wrap"
                                    Margin="0, 20, 0, 0"/>
                         
@@ -161,10 +161,15 @@
                             
                             <Button x:Name="BulkSaveButton"
                                     Grid.Column="1"
-                                    Content="save"
                                     Width="100"
                                     HorizontalContentAlignment="Center"
-                                    Click="BulkSaveButton_Click"/>
+                                    VerticalContentAlignment="Center"
+                                    Click="BulkSaveButton_Click">
+                                    <TextBlock Text="save"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       FontSize="18" />
+                            </Button>
                         </Grid>
                     </StackPanel>
 
