@@ -6,6 +6,7 @@ windows version finally arrives. linux version will come soon. you can download 
 
 # what the app looks like
 ### on android
-
+<img src="https://raw.githubusercontent.com/eightynine77/pally-file-paste/refs/heads/main/images/android.png" width="251" height="509"/>
 
 ### on windows
+<img src="https://raw.githubusercontent.com/eightynine77/pally-file-paste/refs/heads/main/images/windows.png" width="558" height="312"/>
