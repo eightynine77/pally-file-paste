@@ -6,7 +6,7 @@
         xmlns:views="using:pallyFilePaste.Views"
         mc:Ignorable="d"
         x:Class="pallyFilePaste.Views.MainWindow"
-        Width="850" 
+        Width="900" 
         Height="500"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/PallyPasteFile_desktopIcon.ico"
@@ -53,7 +53,7 @@
             </ListBox>
 
             <Grid Grid.Row="3" ColumnDefinitions="*, Auto">
-                <TextBlock x:Name="BulkStatusText" Grid.Column="0" Text="[status message]" Foreground="Red" VerticalAlignment="Center" IsVisible="False"/>
+                <TextBlock x:Name="BulkStatusText" Grid.Column="0" Text="[status message]" Foreground="Red" VerticalAlignment="Center" IsVisible="False" TextWrapping="Wrap"/>
                 <Button x:Name="BulkSaveButton" Grid.Column="1" Width="100" HorizontalContentAlignment="Center" Click="BulkSaveButton_Click">
                     <TextBlock Text="save" FontSize="18"/>
                 </Button>
