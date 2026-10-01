@@ -86,22 +86,6 @@
                         
                         <Grid MinHeight="200"
                               RowDefinitions="200,180">
-
-                            <!-- Desktop/Linux/Windows bulk input -->
-                            <Border Grid.Row="0"
-                                    IsVisible="{OnPlatform Default=True, Android=False}">
-                                <TextBox x:Name="BulkPasteTextBox"
-                                         MinHeight="200"
-                                         PlaceholderText="Tap here to focus &amp; paste from clipboard..."
-                                         PastingFromClipboard="BulkPasteTextBox_PastingFromClipboard"
-                                         TextChanged="BulkPasteTextBox_TextChanged"
-                                         AcceptsReturn="True"
-                                         TextWrapping="Wrap"
-                                         VerticalContentAlignment="Top"
-                                         BorderThickness="1"
-                                         BorderBrush="Gray"
-                                         CornerRadius="4"/>
-                            </Border>
                             
                             <!-- Android native bulk input -->
                             <Border Grid.Row="0"
@@ -125,8 +109,7 @@
                                  BorderThickness="2"
                                  BorderBrush="#03AC13"
                                  CornerRadius="4"
-                                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                                 PointerPressed="BulkPasteListBox_PointerPressed">
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                                 <ListBox.ItemTemplate>
                                     <DataTemplate x:DataType="views:MainView+PastedImage">

@@ -42,51 +42,6 @@ public partial class MainView : UserControl
             AndroidBulkPasteHost_TextPasted;
     }
 
-    private static string GetAppDataFolder()
-    {
-        return Path.Combine(
-            Environment.GetFolderPath(
-                Environment.SpecialFolder.LocalApplicationData,
-                Environment.SpecialFolderOption.Create),
-            AppFolderName);
-    }
-
-    private static string GetFallbackImageFolder()
-    {
-        return Path.Combine(
-            GetAppDataFolder(),
-            "Images");
-    }
-
-    private static void RememberSaveFolder(string folder)
-    {
-        var appDataFolder = GetAppDataFolder();
-
-        Directory.CreateDirectory(appDataFolder);
-
-        var settingsPath = Path.Combine(
-            appDataFolder,
-            SaveFolderFileName);
-
-        File.WriteAllText(settingsPath, folder);
-    }
-
-    private static string? GetRememberedSaveFolder()
-    {
-        var settingsPath = Path.Combine(
-            GetAppDataFolder(),
-            SaveFolderFileName);
-
-        if (!File.Exists(settingsPath))
-            return null;
-
-        var folder = File.ReadAllText(settingsPath).Trim();
-
-        return string.IsNullOrWhiteSpace(folder)
-            ? null
-            : folder;
-    }
-
     public static IAndroidImageSaver? NativeAndroidSaver { get; set; }
 
     private async void SinglePasteButton_Click(object? sender, RoutedEventArgs e)
@@ -109,15 +64,6 @@ public partial class MainView : UserControl
                     SingleStatusText.Text = "Success! Saved image to Pictures/pallyFilePaste";
                     SingleStatusText.Foreground = Brushes.Green;
                 }
-                else
-                {
-                    var savedImage = SaveDesktopImage(bitmap);
-
-                    SingleStatusText.Text = savedImage.UsedFallback
-                    ? $"Saved to AppData:\n{savedImage.FilePath}"
-                    : $"Saved to Documents:\n{savedImage.FilePath}";
-                    SingleStatusText.Foreground = Brushes.Green;
-                }
             }       
             else
             {
@@ -132,110 +78,6 @@ public partial class MainView : UserControl
         }
     
         SingleStatusText.IsVisible = true;
-    }
-
-    private static (string FilePath, bool UsedFallback)
-        SaveDesktopImage(Bitmap bitmap)
-    {
-        var fileName =
-            $"image_{DateTime.Now:yyyyMMdd_HHmmss_fff}.png";
-
-        // 1. Check whether we already decided where to save.
-        var rememberedFolder = GetRememberedSaveFolder();
-
-        if (rememberedFolder != null)
-        {
-            try
-            {
-                var filePath = SaveBitmapToFolder(
-                    bitmap,
-                    rememberedFolder,
-                    fileName);
-
-                var usedFallback =
-                    string.Equals(
-                        rememberedFolder,
-                        GetFallbackImageFolder(),
-                        StringComparison.OrdinalIgnoreCase);
-
-                return (filePath, usedFallback);
-            }
-            catch (UnauthorizedAccessException)
-                when (OperatingSystem.IsWindows())
-            {
-                // The remembered folder is no longer usable.
-                // Fall through and choose a new location.
-            }
-        }
-
-        // 2. No remembered location yet (or it stopped working).
-        var documentsFolder = Path.Combine(
-            Environment.GetFolderPath(
-                Environment.SpecialFolder.MyDocuments),
-            AppFolderName);
-
-        try
-        {
-            var filePath = SaveBitmapToFolder(
-                bitmap,
-                documentsFolder,
-                fileName);
-
-            // Documents worked, so remember it.
-            RememberSaveFolder(documentsFolder);
-
-            return (filePath, false);
-        }
-        catch (UnauthorizedAccessException)
-            when (OperatingSystem.IsWindows())
-        {
-            // Windows rejected Documents.
-            // Switch permanently to our per-user AppData location.
-            var fallbackFolder = GetFallbackImageFolder();
-
-            var filePath = SaveBitmapToFolder(
-                bitmap,
-                fallbackFolder,
-                fileName);
-
-            // Remember the fallback location.
-            RememberSaveFolder(fallbackFolder);
-
-            return (filePath, true);
-        }
-    }
-    private static string SaveBitmapToFolder(Bitmap bitmap, string folder, string fileName)
-    {
-        Directory.CreateDirectory(folder);
-
-        var filePath = Path.Combine(folder, fileName);
-        bitmap.Save(filePath);
-        return filePath;
-    }
-
-    private void BulkPasteListBox_PointerPressed(object? sender, PointerPressedEventArgs e)
-    {
-        #if ANDROID
-            // Android uses the native EditText.
-        #else
-            BulkPasteTextBox.Focus();
-        #endif
-    }
-
-    private async void BulkPasteTextBox_PastingFromClipboard(object? sender, RoutedEventArgs e)
-    {
-        e.Handled = true;
-        await AddImageFromClipboardAsync();
-    }
-
-    private async void BulkPasteTextBox_TextChanged(object? sender, TextChangedEventArgs e)
-    {
-        if (_isProcessingPaste || string.IsNullOrEmpty(BulkPasteTextBox.Text)) return;
-
-        _isProcessingPaste = true;
-        BulkPasteTextBox.Text = string.Empty;
-        await AddImageFromClipboardAsync();
-        _isProcessingPaste = false;
     }
 
     private async void AndroidBulkPasteHost_TextPasted(
