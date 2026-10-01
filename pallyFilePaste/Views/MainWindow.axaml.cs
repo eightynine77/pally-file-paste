@@ -154,7 +154,7 @@ public partial class MainWindow : Window
             }       
             else
             {
-                SingleStatusText.Text = "No image found in clipboard!";
+                SingleStatusText.Text = "No image found in clipboard.";
                 SingleStatusText.Foreground = Brushes.Red;
             }
         }
@@ -202,7 +202,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                BulkStatusText.Text = "No image in clipboard to paste!";
+                BulkStatusText.Text = "No image in clipboard to paste.";
                 BulkStatusText.Foreground = Brushes.Red;
             }
         }
@@ -219,7 +219,7 @@ public partial class MainWindow : Window
     {
         if (BulkImages.Count == 0)
         {
-            BulkStatusText.Text = "No images to save!";
+            BulkStatusText.Text = "No images to save.";
             BulkStatusText.Foreground = Brushes.Red;
             BulkStatusText.IsVisible = true;
             return;
@@ -237,7 +237,7 @@ public partial class MainWindow : Window
                 }
             }
 
-            BulkStatusText.Text = $"Successfully saved {savedCount} images!";
+            BulkStatusText.Text = $"Successfully saved {savedCount} images.";
             BulkStatusText.Foreground = Brushes.Green;
             BulkImages.Clear();
         }

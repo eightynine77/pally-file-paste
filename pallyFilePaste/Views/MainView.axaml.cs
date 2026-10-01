@@ -180,7 +180,7 @@ public partial class MainView : UserControl
             }
             else
             {
-                BulkStatusText.Text = "No image in clipboard to paste!";
+                BulkStatusText.Text = "No image in clipboard to paste.";
                 BulkStatusText.Foreground = Brushes.Red;
             }
         }
@@ -197,7 +197,7 @@ public partial class MainView : UserControl
     {
         if (BulkImages.Count == 0)
         {
-            BulkStatusText.Text = "No images to save!";
+            BulkStatusText.Text = "No images to save.";
             BulkStatusText.Foreground = Brushes.Red;
             BulkStatusText.IsVisible = true;
             return;

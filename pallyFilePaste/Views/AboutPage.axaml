@@ -8,7 +8,7 @@
                        FontWeight="Bold" 
                        TextWrapping="Wrap"
                        HorizontalAlignment="Center"/>
-            <TextBlock Text="2026.9.9 - v1.0.0" 
+            <TextBlock Text="2026.10.1 - v1.0.1" 
                        FontSize="22" 
                        TextWrapping="Wrap"
                        Foreground="Gray" 
