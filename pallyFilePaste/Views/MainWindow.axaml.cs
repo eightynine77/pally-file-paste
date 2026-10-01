@@ -16,8 +16,9 @@ public partial class MainWindow : Window
 {
     private const string AppFolderName = "pallyFilePaste";
     private bool _isProcessingPaste = false;
-    private const string SaveFolderFileName = "save-folder.txt";
 
+    private const string SaveFolderFileName = "save-folder.txt";
+    
     public ObservableCollection<PastedImage> BulkImages { get; } = new();
 
     public MainWindow()
@@ -40,6 +41,133 @@ public partial class MainWindow : Window
         return Path.Combine(
             GetAppDataFolder(),
             "Images");
+    }
+
+    private static string GetDebugLogPath()
+    {
+        return Path.Combine(
+            AppContext.BaseDirectory,
+            "pallyFilePaste-debug.txt");
+    }
+
+    private static void DebugLog(string message)
+    {
+        try
+        {
+            File.AppendAllText(
+                GetDebugLogPath(),
+                $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
+        }
+        catch
+        {
+            // Do not let the debug logger itself break the application.
+        }
+    }
+
+    private static void DebugLogPath(string name, string path)
+    {
+        DebugLog($"--- {name} ---");
+        DebugLog($"Raw path: '{path}'");
+
+        try
+        {
+            DebugLog($"Full path: '{Path.GetFullPath(path)}'");
+        }
+        catch (Exception ex)
+        {
+            DebugLog($"GetFullPath failed: {ex.GetType().Name} - {ex.Message}");
+        }
+
+        DebugLog($"Exists as directory: {Directory.Exists(path)}");
+        DebugLog($"Exists as file: {File.Exists(path)}");
+
+        try
+        {
+            if (File.Exists(path) || Directory.Exists(path))
+            {
+                DebugLog($"Attributes: {File.GetAttributes(path)}");
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog($"GetAttributes failed: {ex.GetType().Name} - {ex.Message}");
+        }
+
+        try
+        {
+            var parent = Directory.GetParent(path);
+
+            if (parent == null)
+            {
+                DebugLog("Parent: <null>");
+                return;
+            }
+
+            DebugLog($"Parent: '{parent.FullName}'");
+            DebugLog($"Parent exists: {parent.Exists}");
+
+            if (parent.Exists)
+            {
+                try
+                {
+                    int itemCount = 0;
+
+                    foreach (var _ in parent.EnumerateFileSystemInfos())
+                    {
+                        itemCount++;
+
+                        // We only need to know whether enumeration works.
+                        if (itemCount >= 1)
+                            break;
+                    }
+
+                    DebugLog(
+                        $"Parent enumeration: SUCCESS (found at least one item: {itemCount > 0})");
+                }
+                catch (Exception ex)
+                {
+                    DebugLog(
+                        $"Parent enumeration: FAILED - {ex.GetType().Name} - {ex.Message}");
+                }
+
+                var testFile = Path.Combine(
+                    parent.FullName,
+                    $".pallyFilePaste_write_test_{Guid.NewGuid():N}.tmp");
+
+                try
+                {
+                    File.WriteAllText(testFile, "pallyFilePaste write test");
+
+                    DebugLog(
+                        "Parent write test: SUCCESS");
+
+                    File.Delete(testFile);
+
+                    DebugLog(
+                        "Parent write-test file cleanup: SUCCESS");
+                }
+                catch (Exception ex)
+                {
+                    DebugLog(
+                        $"Parent write test: FAILED - {ex.GetType().Name} - {ex.Message}");
+
+                    try
+                    {
+                        if (File.Exists(testFile))
+                            File.Delete(testFile);
+                    }
+                    catch
+                    {
+                        // Ignore cleanup failure.
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            DebugLog(
+                $"Parent inspection failed: {ex.GetType().Name} - {ex.Message}");
+        }
     }
 
     private static void RememberSaveFolder(string folder)
@@ -154,7 +282,7 @@ public partial class MainWindow : Window
             }       
             else
             {
-                SingleStatusText.Text = "No image found in clipboard.";
+                SingleStatusText.Text = "No image found in clipboard!";
                 SingleStatusText.Foreground = Brushes.Red;
             }
         }
@@ -202,7 +330,7 @@ public partial class MainWindow : Window
             }
             else
             {
-                BulkStatusText.Text = "No image in clipboard to paste.";
+                BulkStatusText.Text = "No image in clipboard to paste!";
                 BulkStatusText.Foreground = Brushes.Red;
             }
         }
@@ -219,7 +347,7 @@ public partial class MainWindow : Window
     {
         if (BulkImages.Count == 0)
         {
-            BulkStatusText.Text = "No images to save.";
+            BulkStatusText.Text = "No images to save!";
             BulkStatusText.Foreground = Brushes.Red;
             BulkStatusText.IsVisible = true;
             return;
@@ -237,7 +365,7 @@ public partial class MainWindow : Window
                 }
             }
 
-            BulkStatusText.Text = $"Successfully saved {savedCount} images.";
+            BulkStatusText.Text = $"Successfully saved {savedCount} images!";
             BulkStatusText.Foreground = Brushes.Green;
             BulkImages.Clear();
         }

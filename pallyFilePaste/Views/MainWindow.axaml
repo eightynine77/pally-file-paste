@@ -6,7 +6,7 @@
         xmlns:views="using:pallyFilePaste.Views"
         mc:Ignorable="d"
         x:Class="pallyFilePaste.Views.MainWindow"
-        Width="900" 
+        Width="950" 
         Height="500"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/PallyPasteFile_desktopIcon.ico"
