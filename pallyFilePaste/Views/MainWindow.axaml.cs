@@ -42,134 +42,7 @@ public partial class MainWindow : Window
             GetAppDataFolder(),
             "Images");
     }
-
-    private static string GetDebugLogPath()
-    {
-        return Path.Combine(
-            AppContext.BaseDirectory,
-            "pallyFilePaste-debug.txt");
-    }
-
-    private static void DebugLog(string message)
-    {
-        try
-        {
-            File.AppendAllText(
-                GetDebugLogPath(),
-                $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}] {message}{Environment.NewLine}");
-        }
-        catch
-        {
-            // Do not let the debug logger itself break the application.
-        }
-    }
-
-    private static void DebugLogPath(string name, string path)
-    {
-        DebugLog($"--- {name} ---");
-        DebugLog($"Raw path: '{path}'");
-
-        try
-        {
-            DebugLog($"Full path: '{Path.GetFullPath(path)}'");
-        }
-        catch (Exception ex)
-        {
-            DebugLog($"GetFullPath failed: {ex.GetType().Name} - {ex.Message}");
-        }
-
-        DebugLog($"Exists as directory: {Directory.Exists(path)}");
-        DebugLog($"Exists as file: {File.Exists(path)}");
-
-        try
-        {
-            if (File.Exists(path) || Directory.Exists(path))
-            {
-                DebugLog($"Attributes: {File.GetAttributes(path)}");
-            }
-        }
-        catch (Exception ex)
-        {
-            DebugLog($"GetAttributes failed: {ex.GetType().Name} - {ex.Message}");
-        }
-
-        try
-        {
-            var parent = Directory.GetParent(path);
-
-            if (parent == null)
-            {
-                DebugLog("Parent: <null>");
-                return;
-            }
-
-            DebugLog($"Parent: '{parent.FullName}'");
-            DebugLog($"Parent exists: {parent.Exists}");
-
-            if (parent.Exists)
-            {
-                try
-                {
-                    int itemCount = 0;
-
-                    foreach (var _ in parent.EnumerateFileSystemInfos())
-                    {
-                        itemCount++;
-
-                        // We only need to know whether enumeration works.
-                        if (itemCount >= 1)
-                            break;
-                    }
-
-                    DebugLog(
-                        $"Parent enumeration: SUCCESS (found at least one item: {itemCount > 0})");
-                }
-                catch (Exception ex)
-                {
-                    DebugLog(
-                        $"Parent enumeration: FAILED - {ex.GetType().Name} - {ex.Message}");
-                }
-
-                var testFile = Path.Combine(
-                    parent.FullName,
-                    $".pallyFilePaste_write_test_{Guid.NewGuid():N}.tmp");
-
-                try
-                {
-                    File.WriteAllText(testFile, "pallyFilePaste write test");
-
-                    DebugLog(
-                        "Parent write test: SUCCESS");
-
-                    File.Delete(testFile);
-
-                    DebugLog(
-                        "Parent write-test file cleanup: SUCCESS");
-                }
-                catch (Exception ex)
-                {
-                    DebugLog(
-                        $"Parent write test: FAILED - {ex.GetType().Name} - {ex.Message}");
-
-                    try
-                    {
-                        if (File.Exists(testFile))
-                            File.Delete(testFile);
-                    }
-                    catch
-                    {
-                        // Ignore cleanup failure.
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            DebugLog(
-                $"Parent inspection failed: {ex.GetType().Name} - {ex.Message}");
-        }
-    }
-
+    
     private static void RememberSaveFolder(string folder)
     {
         var appDataFolder = GetAppDataFolder();
@@ -226,19 +99,19 @@ public partial class MainWindow : Window
             }
         }
 
-        var documentsFolder = Path.Combine(
+        var picturesFolder = Path.Combine(
             Environment.GetFolderPath(
-                Environment.SpecialFolder.MyDocuments),
+                Environment.SpecialFolder.MyPictures),
             AppFolderName);
 
         try
         {
             var filePath = SaveBitmapToFolder(
                 bitmap,
-                documentsFolder,
+                picturesFolder,
                 fileName);
 
-            RememberSaveFolder(documentsFolder);
+            RememberSaveFolder(picturesFolder);
             return (filePath, false);
         }
         catch (UnauthorizedAccessException) when (OperatingSystem.IsWindows())
@@ -277,7 +150,7 @@ public partial class MainWindow : Window
                 var savedImage = SaveDesktopImage(bitmap);
                 SingleStatusText.Text = savedImage.UsedFallback
                     ? $"Saved to AppData:\n{savedImage.FilePath}"
-                    : $"Saved to Documents:\n{savedImage.FilePath}";
+                    : $"Saved to Pictures:\n{savedImage.FilePath}";
                 SingleStatusText.Foreground = Brushes.Green;
             }       
             else
