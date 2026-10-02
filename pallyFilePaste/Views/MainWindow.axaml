@@ -11,7 +11,7 @@
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/PallyPasteFile_desktopIcon.ico"
         Title="pallyFilePaste">
-
+        
     <Grid ColumnDefinitions="*, *" Margin="20">
         
         <!-- Left Side: Single Paste -->
@@ -53,7 +53,7 @@
             </ListBox>
 
             <Grid Grid.Row="3" ColumnDefinitions="*, Auto">
-                <TextBlock x:Name="BulkStatusText" Grid.Column="0" Text="[status message]" Foreground="Red" VerticalAlignment="Center" IsVisible="False" TextWrapping="Wrap"/>
+                <TextBlock x:Name="BulkStatusText" Grid.Column="0" Text="[status message]" Foreground="Red" VerticalAlignment="Center" IsVisible="False" TextWrapping="Wrap" />
                 <Button x:Name="BulkSaveButton" Grid.Column="1" Width="100" HorizontalContentAlignment="Center" Click="BulkSaveButton_Click">
                     <TextBlock Text="save" FontSize="18"/>
                 </Button>
