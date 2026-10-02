@@ -2,6 +2,7 @@
 a handy app for pasting images from clipboard into files and pasting clipboard images in bulk. available for linux, android, and windows.
 
 # download 
+*announcement: the linux version finally arrives*
 | windows  | android | linux
 |---|---|---| 
 |  [download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.9.9-v1.0.0_windows) |[download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.1-v1.0.1) | [download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.2-v1.0.0_linux)
