@@ -1,0 +1,21 @@
+<Project>
+  <PropertyGroup>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Android'))">
+    <Version>1.0.1</Version>
+    <ReleaseDate>2026-10-01</ReleaseDate>
+    <ApplicationVersion>2</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Desktop'))">
+    <Version>1.0.1</Version>
+    <ReleaseDate>2026-10-03</ReleaseDate>
+  </PropertyGroup>
+
+  <ItemGroup>
+      <AssemblyMetadata Include="ReleaseDate" Value="$(ReleaseDate)" />
+  </ItemGroup>
+</Project>

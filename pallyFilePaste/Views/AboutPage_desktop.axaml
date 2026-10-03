@@ -8,11 +8,11 @@
                        FontWeight="Bold" 
                        TextWrapping="Wrap"
                        HorizontalAlignment="Center"/>
-            <TextBlock Text="2026.10.1 - v1.0.1" 
-                       FontSize="22" 
+            <TextBlock FontSize="22" 
+                       x:Name="theVersion"
                        TextWrapping="Wrap"
                        Foreground="Gray" 
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center"/> 
             <TextBlock Text="A cross-platform app for pasting clipboard images in single files or bulk. available on windows, android, and linux" 
                        TextWrapping="Wrap" 
                        FontSize="18"

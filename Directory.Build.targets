@@ -1,0 +1,13 @@
+<Project>
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'pallyFilePaste.Android'">
+    <ProjectReference Update="..\pallyFilePaste\pallyFilePaste.csproj"
+                      AdditionalProperties="Version=$(Version);ReleaseDate=$(ReleaseDate)" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'pallyFilePaste.Desktop'">
+    <ProjectReference Update="..\pallyFilePaste\pallyFilePaste.csproj"
+                      AdditionalProperties="Version=$(Version);ReleaseDate=$(ReleaseDate)" />
+  </ItemGroup>
+
+</Project>
