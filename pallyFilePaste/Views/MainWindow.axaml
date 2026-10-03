@@ -11,53 +11,100 @@
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/PallyPasteFile_desktopIcon.ico"
         Title="pallyFilePaste">
+    <SplitView x:Name="NavSplitView" 
+               IsPaneOpen="False" 
+               DisplayMode="Overlay"
+               OpenPaneLength="200">
         
-    <Grid ColumnDefinitions="*, *" Margin="20">
+        <!-- The Navigation Menu -->
+        <SplitView.Pane>
+            <StackPanel Spacing="10" Margin="10">
+                <TextBlock Text="Menu" FontWeight="Bold" FontSize="20" Margin="0,10,0,20"/>
+    
+                <Button x:Name="NavHomeButton"
+                        Content="Home" 
+                        HorizontalAlignment="Stretch" 
+                        Background="LightGray"
+                        FontSize="15"
+                        Click="NavHome_Click"/>
+            
+                <Button x:Name="NavAboutButton"
+                        Content="About" 
+                        FontSize="15"
+                        HorizontalAlignment="Stretch" 
+                        Background="Transparent"
+                        Click="NavAbout_Click"/>
+            </StackPanel>
+        </SplitView.Pane>
         
-        <!-- Left Side: Single Paste -->
-        <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="20" Margin="10">
-            <Button x:Name="SinglePasteButton"
-                    HorizontalAlignment="Stretch"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    Height="150"
-                    Click="SinglePasteButton_Click">
-                <TextBlock Text="click here to paste into image" TextWrapping="Wrap" TextAlignment="Center" FontSize="24" />
-            </Button>
-            <TextBlock x:Name="SingleStatusText" Text="[status message]" Foreground="Red" TextWrapping="Wrap" IsVisible="False"/>
-        </StackPanel>
-
-        <!-- Right Side: Bulk Paste -->
-        <Grid Grid.Column="1" RowDefinitions="Auto, *, *, Auto" Margin="10">
-            <TextBlock Grid.Row="0" Text="paste in bulk" FontSize="18" Margin="0, 0, 0, 10"/>
-            
-            <TextBox Grid.Row="1" x:Name="BulkPasteTextBox"
-                     MinHeight="100"
-                     PlaceholderText="Tap here to focus &amp; paste from clipboard..."
-                     PastingFromClipboard="BulkPasteTextBox_PastingFromClipboard"
-                     TextChanged="BulkPasteTextBox_TextChanged"
-                     AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"
-                     BorderThickness="1" BorderBrush="Gray" CornerRadius="4"/>
-            
-            <ListBox Grid.Row="2" x:Name="BulkPasteListBox" Margin="0,10"
-                     Background="Transparent" BorderThickness="2" BorderBrush="#03AC13" CornerRadius="4"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <ListBox.ItemTemplate>
-                    <DataTemplate x:DataType="views:MainWindow+PastedImage">
-                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center" Margin="4">
-                            <Image Source="{Binding Image}" Width="40" Height="40" Stretch="UniformToFill"/>
-                            <TextBlock Text="{Binding FileName}" VerticalAlignment="Center"/>
+        <!-- The Main Content -->
+        <SplitView.Content>
+            <Grid x:Name="MainContentGrid" RowDefinitions="Auto,*">
+                
+                <!-- Hamburger Button Header -->
+                <Button Grid.Row="0" 
+                        Content="☰" 
+                        FontSize="20" 
+                        Width="41" 
+                        Height="41" 
+                        Background="Transparent" 
+                        Click="HamburgerButton_Click" 
+                        Margin="3"/>
+                <!-- Home Content (Your Original Desktop Grid) -->
+                <ScrollViewer x:Name="HomeContentView" Grid.Row="1" VerticalScrollBarVisibility="Auto" IsVisible="True">
+                    <Grid ColumnDefinitions="*, *" Margin="20" MinHeight="420">
+                        
+                        <!-- Left Side: Single Paste -->
+                        <StackPanel Grid.Column="0" VerticalAlignment="Center" Spacing="20" Margin="10">
+                            <Button x:Name="SinglePasteButton"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalContentAlignment="Center"
+                                    HorizontalContentAlignment="Center"
+                                    Height="150"
+                                    Click="SinglePasteButton_Click">
+                                <TextBlock Text="click here to paste into image" TextWrapping="Wrap" TextAlignment="Center" FontSize="24" />
+                            </Button>
+                            <TextBlock x:Name="SingleStatusText" Text="[status message]" Foreground="Red" TextWrapping="Wrap" IsVisible="False"/>
                         </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
 
-            <Grid Grid.Row="3" ColumnDefinitions="*, Auto">
-                <TextBlock x:Name="BulkStatusText" Grid.Column="0" Text="[status message]" Foreground="Red" VerticalAlignment="Center" IsVisible="False" TextWrapping="Wrap" />
-                <Button x:Name="BulkSaveButton" Grid.Column="1" Width="100" HorizontalContentAlignment="Center" Click="BulkSaveButton_Click">
-                    <TextBlock Text="save" FontSize="18"/>
-                </Button>
+                        <!-- Right Side: Bulk Paste -->
+                        <Grid Grid.Column="1" RowDefinitions="Auto, *, *, Auto" Margin="10">
+                            <TextBlock Grid.Row="0" Text="paste in bulk" FontSize="18" Margin="0, 0, 0, 10"/>
+                            
+                            <TextBox Grid.Row="1" x:Name="BulkPasteTextBox"
+                                     MinHeight="100"
+                                     PlaceholderText="Tap here to focus &amp; paste from clipboard..."
+                                     PastingFromClipboard="BulkPasteTextBox_PastingFromClipboard"
+                                     TextChanged="BulkPasteTextBox_TextChanged"
+                                     AcceptsReturn="True" TextWrapping="Wrap" VerticalContentAlignment="Top"
+                                     BorderThickness="1" BorderBrush="Gray" CornerRadius="4"/>
+                            
+                            <ListBox Grid.Row="2" x:Name="BulkPasteListBox" Margin="0,10"
+                                     Background="Transparent" BorderThickness="2" BorderBrush="#03AC13" CornerRadius="4"
+                                     ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="views:MainWindow+PastedImage">
+                                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center" Margin="4">
+                                            <Image Source="{Binding Image}" Width="40" Height="40" Stretch="UniformToFill"/>
+                                            <TextBlock Text="{Binding FileName}" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+
+                            <Grid Grid.Row="3" ColumnDefinitions="*, Auto">
+                                <TextBlock x:Name="BulkStatusText" Grid.Column="0" Text="[status message]" Foreground="Red" VerticalAlignment="Center" IsVisible="False" TextWrapping="Wrap" />
+                                <Button x:Name="BulkSaveButton" Grid.Column="1" Width="100" HorizontalContentAlignment="Center" Click="BulkSaveButton_Click">
+                                    <TextBlock Text="save" FontSize="18"/>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+
+                <!-- About Page Content -->
+                <views:AboutPage x:Name="AboutContentView" Grid.Row="1" IsVisible="False"/>
             </Grid>
-        </Grid>
-    </Grid>
+        </SplitView.Content>
+    </SplitView>
 </Window>

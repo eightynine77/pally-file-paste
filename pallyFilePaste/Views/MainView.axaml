@@ -57,7 +57,7 @@
                 <!-- Your Existing Content -->
                 <ScrollViewer x:Name="HomeContentView"
                       Grid.Row="1"
-                      VerticalScrollBarVisibility="Auto">
+                      VerticalScrollBarVisibility="Visible">
                     
                     <StackPanel Margin="20" Spacing="15">
                         
@@ -157,6 +157,7 @@
                     </StackPanel>
 
                 </ScrollViewer>
+
                 <views:AboutPage x:Name="AboutContentView" Grid.Row="1" IsVisible="False"/>
             </Grid>
         </SplitView.Content>

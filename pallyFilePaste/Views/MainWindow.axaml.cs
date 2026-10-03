@@ -128,6 +128,30 @@ public partial class MainWindow : Window
         }
     }
 
+    private void HamburgerButton_Click(object? sender, RoutedEventArgs e)
+    {
+        // Toggles the menu open and closed
+        NavSplitView.IsPaneOpen = !NavSplitView.IsPaneOpen;
+    }
+
+    private void NavHome_Click(object? sender, RoutedEventArgs e)
+    {
+        NavSplitView.IsPaneOpen = false;
+        HomeContentView.IsVisible = true;
+        AboutContentView.IsVisible = false;
+        NavHomeButton.Background = Brushes.LightGray;
+        NavAboutButton.Background = Brushes.Transparent;
+    }
+
+    private void NavAbout_Click(object? sender, RoutedEventArgs e)
+    {
+        NavSplitView.IsPaneOpen = false;
+        HomeContentView.IsVisible = false;
+        AboutContentView.IsVisible = true;
+        NavHomeButton.Background = Brushes.Transparent;
+        NavAboutButton.Background = Brushes.LightGray;
+    }
+
     private static string SaveBitmapToFolder(Bitmap bitmap, string folder, string fileName)
     {
         Directory.CreateDirectory(folder);
