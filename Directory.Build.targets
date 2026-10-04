@@ -1,13 +1,15 @@
 <Project>
 
-  <ItemGroup Condition="'$(MSBuildProjectName)' == 'pallyFilePaste.Android'">
-    <ProjectReference Update="..\pallyFilePaste\pallyFilePaste.csproj"
-                      AdditionalProperties="Version=$(Version);ReleaseDate=$(ReleaseDate)" />
-  </ItemGroup>
+  <!-- Windows desktop -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'pallyFilePaste.Desktop' And $([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('win'))">
+    <Version>$(WindowsVersion)</Version>
+    <ReleaseDate>$(WindowsReleaseDate)</ReleaseDate>
+  </PropertyGroup>
 
-  <ItemGroup Condition="'$(MSBuildProjectName)' == 'pallyFilePaste.Desktop'">
-    <ProjectReference Update="..\pallyFilePaste\pallyFilePaste.csproj"
-                      AdditionalProperties="Version=$(Version);ReleaseDate=$(ReleaseDate)" />
-  </ItemGroup>
+  <!-- Linux desktop -->
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'pallyFilePaste.Desktop' And $([System.String]::Copy('$(RuntimeIdentifier)').StartsWith('linux'))">
+    <Version>$(LinuxVersion)</Version>
+    <ReleaseDate>$(LinuxReleaseDate)</ReleaseDate>
+  </PropertyGroup>
 
 </Project>

@@ -103,7 +103,7 @@
                 </ScrollViewer>
 
                 <!-- About Page Content -->
-                <views:AboutPage_desktop x:Name="AboutContentView" Grid.Row="1" IsVisible="False"/>
+                <views:AboutPage x:Name="AboutContentView" Grid.Row="1" IsVisible="False"/>
             </Grid>
         </SplitView.Content>
     </SplitView>

@@ -1,21 +1,38 @@
 <Project>
   <PropertyGroup>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+
+    <!-- Android -->
+    <AndroidVersion>1.0.1</AndroidVersion>
+    <AndroidReleaseDate>2026-10-01</AndroidReleaseDate>
+    <AndroidApplicationVersion>2</AndroidApplicationVersion>
+    <AndroidApplicationDisplayVersion>1.0.1</AndroidApplicationDisplayVersion>
+
+    <!-- Windows -->
+    <WindowsVersion>1.0.1</WindowsVersion>
+    <WindowsReleaseDate>2026-10-03</WindowsReleaseDate>
+
+    <!-- Linux -->
+    <LinuxVersion>1.0.1</LinuxVersion>
+    <LinuxReleaseDate>2026-10-04</LinuxReleaseDate>
   </PropertyGroup>
 
+  <!-- Android project -->
   <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Android'))">
-    <Version>1.0.1</Version>
-    <ReleaseDate>2026-10-01</ReleaseDate>
-    <ApplicationVersion>2</ApplicationVersion>
-    <ApplicationDisplayVersion>1.0.1</ApplicationDisplayVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Desktop'))">
-    <Version>1.0.1</Version>
-    <ReleaseDate>2026-10-03</ReleaseDate>
+    <Version>$(AndroidVersion)</Version>
+    <ReleaseDate>$(AndroidReleaseDate)</ReleaseDate>
+    <ApplicationVersion>$(AndroidApplicationVersion)</ApplicationVersion>
+    <ApplicationDisplayVersion>$(AndroidApplicationDisplayVersion)</ApplicationDisplayVersion>
   </PropertyGroup>
 
   <ItemGroup>
-      <AssemblyMetadata Include="ReleaseDate" Value="$(ReleaseDate)" />
+    <AssemblyMetadata Include="AndroidVersion" Value="$(AndroidVersion)" />
+    <AssemblyMetadata Include="AndroidReleaseDate" Value="$(AndroidReleaseDate)" />
+
+    <AssemblyMetadata Include="WindowsVersion" Value="$(WindowsVersion)" />
+    <AssemblyMetadata Include="WindowsReleaseDate" Value="$(WindowsReleaseDate)" />
+
+    <AssemblyMetadata Include="LinuxVersion" Value="$(LinuxVersion)" />
+    <AssemblyMetadata Include="LinuxReleaseDate" Value="$(LinuxReleaseDate)" />
   </ItemGroup>
 </Project>
