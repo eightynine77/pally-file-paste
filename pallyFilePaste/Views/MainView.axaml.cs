@@ -23,9 +23,6 @@ namespace pallyFilePaste.Views;
 
 public partial class MainView : UserControl
 {
-    private const string AppFolderName = "pallyFilePaste";
-    private bool _isProcessingPaste = false;
-    private const string SaveFolderFileName = "save-folder.txt";
 
     public ObservableCollection<PastedImage> BulkImages { get; } = new();
 
@@ -116,6 +113,24 @@ public partial class MainView : UserControl
         else
         {
             await Dispatcher.UIThread.InvokeAsync(Add);
+        }
+    }
+
+    private void DiscardButton_Click(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button && button.DataContext is PastedImage image)
+        {
+            BulkImages.Remove(image);
+            image.Image?.Dispose();
+
+            if (BulkImages.Count == 0)
+            {
+                BulkStatusText.IsVisible = false;
+            }
+            else
+            {
+                BulkStatusText.Text = $"Pasted item #{BulkImages.Count}";
+            }
         }
     }
 

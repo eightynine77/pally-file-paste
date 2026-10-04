@@ -113,19 +113,27 @@
 
                                 <ListBox.ItemTemplate>
                                     <DataTemplate x:DataType="views:MainView+PastedImage">
-                                        <StackPanel Orientation="Horizontal"
-                                                    Spacing="10"
-                                                    VerticalAlignment="Center"
-                                                    Margin="4">
-
-                                            <Image Source="{Binding Image}"
+                                        <Grid ColumnDefinitions="Auto,*,Auto" Margin="4">
+                                            <Image Grid.Column="0"
+                                                   Source="{Binding Image}"
                                                    Width="40"
                                                    Height="40"
-                                                   Stretch="UniformToFill"/>
+                                                   Stretch="UniformToFill"
+                                                   Margin="0,0,10,0"/>
 
-                                            <TextBlock Text="{Binding FileName}"
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding FileName}"
                                                        VerticalAlignment="Center"/>
-                                        </StackPanel>
+
+                                            <Button Grid.Column="2"
+                                                    Content="X"
+                                                    VerticalAlignment="Center"
+                                                    Padding="8,4"
+                                                    FontSize="20"
+                                                    Background="Red"
+                                                    Foreground="White"
+                                                    Click="DiscardButton_Click"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
 

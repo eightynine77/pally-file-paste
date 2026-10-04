@@ -160,6 +160,24 @@ public partial class MainWindow : Window
         return filePath;
     }
 
+    private void DiscardButton_Click(object? sender, RoutedEventArgs e)
+    {
+        if (sender is Button button && button.DataContext is PastedImage image)
+        {
+            BulkImages.Remove(image);
+            image.Image?.Dispose();
+
+            if (BulkImages.Count == 0)
+            {
+                BulkStatusText.IsVisible = false;
+            }
+            else
+            {
+                BulkStatusText.Text = $"Pasted item #{BulkImages.Count}";
+            }
+        }
+    }
+
     private async void SinglePasteButton_Click(object? sender, RoutedEventArgs e)
     {
         try
