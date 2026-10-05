@@ -1,15 +1,13 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-
 using Android.Graphics;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
-
 using Avalonia.Android;
 using Avalonia.Platform;
-
+using System.Runtime.Versioning;
 using pallyFilePaste;
 
 namespace pallyFilePaste.Android;
@@ -132,18 +130,24 @@ public static class AndroidBulkPasteTextBoxHandler
                 return inputConnection;
             }
 
-            // Tell Gboard that this editor accepts images.
-            outAttrs.ContentMimeTypes = new[]
+            if (OperatingSystem.IsAndroidVersionAtLeast(25))
             {
-                "image/*"
-            };
+                // Tell Gboard that this editor accepts images.
+                outAttrs.ContentMimeTypes = new[]
+                {
+                    "image/*"
+                };
 
-            return new RichInputConnection(
-                inputConnection,
-                _host);
+                return new RichInputConnection(
+                    inputConnection,
+                    _host);
+            }
+
+            return inputConnection;
         }
     }
 
+    [SupportedOSPlatform("android25.0")]
     private sealed class RichInputConnection
         : InputConnectionWrapper
     {
@@ -197,6 +201,11 @@ public static class AndroidBulkPasteTextBoxHandler
                     global::Android.App.Application.Context
                         .ContentResolver;
 
+                if (resolver == null)
+                {
+                    return;
+                }
+
                 using var inputStream =
                     resolver.OpenInputStream(uri);
 
@@ -217,9 +226,17 @@ public static class AndroidBulkPasteTextBoxHandler
                 using var memoryStream =
                     new MemoryStream();
 
+                var pngFormat =
+                    global::Android.Graphics.Bitmap.CompressFormat.Png;
+
+                if (pngFormat == null)
+                {
+                    return;
+                }
+
                 var compressed =
                     androidBitmap.Compress(
-                        global::Android.Graphics.Bitmap.CompressFormat.Png,
+                        pngFormat,
                         100,
                         memoryStream);
 

@@ -8,7 +8,6 @@ using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
-using Avalonia.Threading;
 
 namespace pallyFilePaste.Views;
 
@@ -156,7 +155,11 @@ public partial class MainWindow : Window
     {
         Directory.CreateDirectory(folder);
         var filePath = Path.Combine(folder, fileName);
-        bitmap.Save(filePath);
+
+        bitmap.Save(
+            filePath,
+            PngBitmapEncoderOptions.Default);
+
         return filePath;
     }
 
