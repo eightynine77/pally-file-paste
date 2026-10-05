@@ -1,0 +1,1 @@
+***use the icons folder for the linuxdeploy's `AppDir/` folder when you want to create an appimage***

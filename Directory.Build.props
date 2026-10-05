@@ -3,18 +3,18 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 
     <!-- Android -->
-    <AndroidVersion>1.0.1</AndroidVersion>
-    <AndroidReleaseDate>2026-10-01</AndroidReleaseDate>
-    <AndroidApplicationVersion>2</AndroidApplicationVersion>
-    <AndroidApplicationDisplayVersion>1.0.1</AndroidApplicationDisplayVersion>
+    <AndroidVersion>1.1.0</AndroidVersion>
+    <AndroidReleaseDate>2026-10-05</AndroidReleaseDate>
+    <AndroidApplicationVersion>3</AndroidApplicationVersion>
+    <AndroidApplicationDisplayVersion>1.1.0</AndroidApplicationDisplayVersion>
 
     <!-- Windows -->
-    <WindowsVersion>1.0.1</WindowsVersion>
-    <WindowsReleaseDate>2026-10-03</WindowsReleaseDate>
+    <WindowsVersion>1.1.0</WindowsVersion>
+    <WindowsReleaseDate>2026-10-05</WindowsReleaseDate>
 
     <!-- Linux -->
-    <LinuxVersion>1.0.1</LinuxVersion>
-    <LinuxReleaseDate>2026-10-04</LinuxReleaseDate>
+    <LinuxVersion>1.1.0</LinuxVersion>
+    <LinuxReleaseDate>2026-10-05</LinuxReleaseDate>
   </PropertyGroup>
 
   <!-- Android project -->
