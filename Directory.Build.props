@@ -10,7 +10,7 @@
 
     <!-- Windows -->
     <WindowsVersion>1.1.0</WindowsVersion>
-    <WindowsReleaseDate>2026-10-05</WindowsReleaseDate>
+    <WindowsReleaseDate>2026-10-06</WindowsReleaseDate>
 
     <!-- Linux -->
     <LinuxVersion>1.1.0</LinuxVersion>
