@@ -25,6 +25,11 @@
     <ApplicationDisplayVersion>$(AndroidApplicationDisplayVersion)</ApplicationDisplayVersion>
   </PropertyGroup>
 
+  <!-- Windows project -->
+  <PropertyGroup Condition="$(MSBuildProjectName.EndsWith('.Desktop'))">
+    <ApplicationIcon>$(MSBuildThisFileDirectory)pallyFilePaste\Assets\PallyPasteFile_desktopIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
   <ItemGroup>
     <AssemblyMetadata Include="AndroidVersion" Value="$(AndroidVersion)" />
     <AssemblyMetadata Include="AndroidReleaseDate" Value="$(AndroidReleaseDate)" />
