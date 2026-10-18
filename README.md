@@ -14,8 +14,5 @@ for the linux version, do not expect 32-bit linux version of the app any time so
 ### on android
 <img src="https://raw.githubusercontent.com/eightynine77/pally-file-paste/refs/heads/main/images/android.png" width="251" height="509"/>
 
-### on windows
-<img src="https://raw.githubusercontent.com/eightynine77/pally-file-paste/refs/heads/main/images/windows.png" width="558" height="312"/>
-
-### on linux
-<img src="https://raw.githubusercontent.com/eightynine77/pally-file-paste/refs/heads/main/images/linux.png" width="558" height="312"/>
+### on desktop (linux and windows)
+<img src="https://raw.githubusercontent.com/eightynine77/pally-file-paste/refs/heads/main/images/desktop.png" width="558" height="312"/>
