@@ -5,7 +5,7 @@ a handy app for pasting images from clipboard into files and pasting clipboard i
 *announcement: the linux version finally arrives*
 | windows  | android | linux
 |---|---|---| 
-|  [download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.9.9-v1.0.0_windows) |[download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.1-v1.0.1) | [download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.2-v1.0.0_linux)
+|  [download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.6-v1.1.0_windows) |[download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.5-v1.1.0) | [download](https://github.com/eightynine77/pally-file-paste/releases/tag/2026.10.5-v1.1.0_linux)
 
 # note
 for the linux version, do not expect 32-bit linux version of the app any time soon as the dotnet this app is running on is dotnet 10.0 and that version of dotnet doesn't support 32-bit linux. *feel free to contribute or fork this repository to add 32-bit linux support.*
