@@ -5,6 +5,10 @@
     <SupportedOSPlatformVersion>23</SupportedOSPlatformVersion>
     <Nullable>enable</Nullable>
     <ApplicationTitle>pally file paste</ApplicationTitle>
+    
+    <RuntimeIdentifiers>android-arm;android-arm64</RuntimeIdentifiers>
+    <!-- comment this code out if you want to specify device architecture using dotnet's command-->
+
     <ApplicationId>com.jebbidan.pallyFilePaste</ApplicationId>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
