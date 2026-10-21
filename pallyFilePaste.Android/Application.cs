@@ -15,12 +15,22 @@ namespace pallyFilePaste.Android
         {
         }
 
+
+
         protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         {
             AndroidBulkPasteTextBoxHandler.Register();
 
             return base.CustomizeAppBuilder(builder)
-                .WithInterFont();
+                .WithInterFont()
+                .With(new AndroidPlatformOptions
+                {
+                    RenderingMode = new[]
+                    {
+                        AndroidRenderingMode.Egl,
+                        AndroidRenderingMode.Software
+                    }
+                });
         }
     }
 }
