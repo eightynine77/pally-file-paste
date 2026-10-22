@@ -3,10 +3,10 @@
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 
     <!-- Android -->
-    <AndroidVersion>1.1.1</AndroidVersion>
-    <AndroidReleaseDate>2026-10-21</AndroidReleaseDate>
-    <AndroidApplicationVersion>4</AndroidApplicationVersion>
-    <AndroidApplicationDisplayVersion>1.1.0</AndroidApplicationDisplayVersion>
+    <AndroidVersion>1.2.0</AndroidVersion>
+    <AndroidReleaseDate>2026-10-22</AndroidReleaseDate>
+    <AndroidApplicationVersion>5</AndroidApplicationVersion>
+    <AndroidApplicationDisplayVersion>1.2.0</AndroidApplicationDisplayVersion>
 
     <!-- Windows -->
     <WindowsVersion>1.1.0</WindowsVersion>
