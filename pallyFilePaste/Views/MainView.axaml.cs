@@ -26,9 +26,17 @@ public partial class MainView : UserControl
 
     public ObservableCollection<PastedImage> BulkImages { get; } = new();
 
+    // Allow Android project to trigger the UI
+    public static MainView? Instance { get; private set; }
+    
+    // Allow Avalonia to trigger the Android permission request
+    public static Action? RequestPermissionAction { get; set; }
+
     public MainView()
     {
         InitializeComponent();
+
+        Instance = this;
 
         BulkPasteListBox.ItemsSource = BulkImages;
 
@@ -40,6 +48,24 @@ public partial class MainView : UserControl
     }
 
     public static IAndroidImageSaver? NativeAndroidSaver { get; set; }
+
+    public void ShowPermissionWarning()
+    {
+        Dispatcher.UIThread.Post(() => PermissionOverlay.IsVisible = true);
+        AndroidBulkPasteHost.IsVisible = false;
+    }
+
+    public void HidePermissionWarning()
+    {
+        Dispatcher.UIThread.Post(() => PermissionOverlay.IsVisible = false);
+        AndroidBulkPasteHost.IsVisible = true;
+    }
+
+    private void AllowPermission_Click(object? sender, RoutedEventArgs e)
+    {
+        // Triggers the permission request back in the Android project
+        RequestPermissionAction?.Invoke();
+    }
 
     private async void SinglePasteButton_Click(object? sender, RoutedEventArgs e)
     {
