@@ -19,17 +19,21 @@ public class MainActivity : AvaloniaMainActivity
 
         pallyFilePaste.Views.MainView.NativeAndroidSaver = new AndroidImageSaver();
 
-        // Request file permissions dynamically on Android 6.0 and above
-        if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+        // Request write permission only on Android 6–9.
+        // Android 10+ uses MediaStore and does not need this permission.
+        if (Build.VERSION.SdkInt >= BuildVersionCodes.M &&
+            Build.VERSION.SdkInt <= BuildVersionCodes.P)
         {
-            if (this.CheckSelfPermission(global::Android.Manifest.Permission.WriteExternalStorage) != Permission.Granted ||
-                this.CheckSelfPermission(global::Android.Manifest.Permission.ReadExternalStorage) != Permission.Granted)
+            if (CheckSelfPermission(
+                    global::Android.Manifest.Permission.WriteExternalStorage)
+                != Permission.Granted)
             {
-                this.RequestPermissions(new[] 
-                { 
-                    global::Android.Manifest.Permission.WriteExternalStorage, 
-                    global::Android.Manifest.Permission.ReadExternalStorage 
-                }, 0);
+                RequestPermissions(
+                    new[]
+                    {
+                        global::Android.Manifest.Permission.WriteExternalStorage
+                    },
+                    0);
             }
         }
     }
