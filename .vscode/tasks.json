@@ -13,6 +13,18 @@
             ],
             "group": "build",
             "problemMatcher": []
+        },
+        {
+            "label": "Run Avalonia Desktop",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj"
+            ],
+            "group": "build",
+            "problemMatcher": []
         }
     ]
 }
