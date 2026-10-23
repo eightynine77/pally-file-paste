@@ -1,7 +1,13 @@
-.PHONY: build clean deskrun andrun linpubreg linpubunbun winpub64 winpub86 fresh
+.PHONY: build buildandroid builddesk clean deskrun andrun linpubreg linpubunbun winpub64 winpub86 fresh
 
 build:
 	dotnet build
+
+buildandroid:
+	dotnet build pallyFilePaste.Android/pallyFilePaste.Android.csproj
+
+builddesk:
+	dotnet build pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj
 
 clean:
 	dotnet clean
