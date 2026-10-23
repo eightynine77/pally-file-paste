@@ -1,0 +1,11 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Avalonia: pallyFilePaste.Desktop",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj"
+        }
+    ]
+}

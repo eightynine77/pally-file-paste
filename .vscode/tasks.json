@@ -1,0 +1,18 @@
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Avalonia Android",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "run",
+                "--project",
+                "pallyFilePaste.Android/pallyFilePaste.Android.csproj"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        }
+    ]
+}
