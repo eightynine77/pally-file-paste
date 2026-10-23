@@ -25,6 +25,17 @@
             ],
             "group": "build",
             "problemMatcher": []
+        },
+        {
+            "label": "Start android emulator",
+            "type": "process",
+            "command": "emulator",
+            "args": [
+                "@le-fon",
+            ],
+            "group": "build",
+            "problemMatcher": []
         }
+
     ]
 }
