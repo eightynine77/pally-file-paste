@@ -67,42 +67,6 @@ public partial class MainView : UserControl
         RequestPermissionAction?.Invoke();
     }
 
-    private void OpenFolderButton_Click(
-        object? sender,
-        RoutedEventArgs e)
-    {
-    #if ANDROID
-        try
-        {
-            var intent = new Intent(
-                Intent.ActionOpenDocumentTree);
-
-            var initialUri =
-                DocumentsContract.BuildDocumentUri(
-                    "com.android.externalstorage.documents",
-                    "primary:Pictures/pallyFilePaste");
-
-            intent.PutExtra(
-                DocumentsContract.ExtraInitialUri,
-                initialUri);
-
-            intent.AddFlags(
-                ActivityFlags.NewTask);
-
-            global::Android.App.Application.Context
-                .StartActivity(intent);
-        }
-        catch (Exception ex)
-        {
-            SingleStatusText.Text =
-                $"Could not open folder: {ex.Message}";
-
-            SingleStatusText.Foreground = Brushes.Red;
-            SingleStatusText.IsVisible = true;
-        }
-    #endif
-    }
-
     private async void SinglePasteButton_Click(object? sender, RoutedEventArgs e)
     {
         try
