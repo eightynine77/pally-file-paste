@@ -27,22 +27,6 @@
             "problemMatcher": []
         },
         {
-            "label": "build Avalonia for linux",
-            "type": "process",
-            "command": "dotnet",
-            "args": [
-                "run",
-                "build",
-                "pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj",
-                "-c",
-                "Release",
-                "-r", 
-                "linux-x64"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
             "label": "Start android emulator",
             "type": "process",
             "command": "emulator",
