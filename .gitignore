@@ -428,6 +428,10 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# bin and obj folders
+bin/
+obj/
+
 # Official VS Code C# Dev Kit Extension exclusion
 #*.lscache
 
