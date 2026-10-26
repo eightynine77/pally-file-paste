@@ -18,7 +18,7 @@ deskrun:
 andrun:
 	dotnet run --project pallyFilePaste.Android/pallyFilePaste.Android.csproj
 
-linpubreg:
+linpubbun:
 	dotnet publish pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj -c Release -r linux-x64 --self-contained true -p:PublishTrimmed=true
 
 linpubunbun:

@@ -59,6 +59,38 @@
             "problemMatcher": []
         },
         {
+            "label": "Clean Avalonia Desktop",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "clean",
+                "pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean Avalonia Android",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "clean",
+                "pallyFilePaste.Android/pallyFilePaste.Android.csproj"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Clean Project",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "clean"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Start android emulator",
             "type": "process",
             "command": "emulator",

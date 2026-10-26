@@ -8,6 +8,9 @@ using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace pallyFilePaste.Views;
 
@@ -24,6 +27,76 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         BulkPasteListBox.ItemsSource = BulkImages;
+    }
+
+    private void OpenFolderButton_Click(object? sender, RoutedEventArgs e)
+    {
+        // Define the target Pictures directory used by the application
+        var picturesFolder = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.MyPictures),
+            AppFolderName); // AppFolderName is already defined as "pallyFilePaste"
+
+        // Ensure the directory exists before attempting to open it
+        if (!Directory.Exists(picturesFolder))
+        {
+            Directory.CreateDirectory(picturesFolder);
+        }
+
+        try
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = picturesFolder,
+                    UseShellExecute = true,
+                    Verb = "open"
+                });
+            }
+
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                string[][] commands =
+                [
+                    ["xdg-open", picturesFolder],
+                    ["gio", "open", picturesFolder],
+                    ["kde-open", picturesFolder],
+                    ["exo-open", "--launch", "FileManager", picturesFolder],
+                    ["pcmanfm", picturesFolder],
+                    ["dde-open", picturesFolder]
+                ];
+
+                foreach (string[] command in commands)
+                {
+                    try
+                    {
+                        var startInfo = new ProcessStartInfo
+                        {
+                            FileName = command[0],
+                            UseShellExecute = false
+                        };
+
+                        foreach (string argument in command.Skip(1))
+                            startInfo.ArgumentList.Add(argument);
+
+                        Process.Start(startInfo);
+                        break;
+                    }
+                    catch (System.ComponentModel.Win32Exception)
+                    {
+                    }
+                    catch (IOException)
+                    {
+                    }
+                }
+            }
+
+        }
+        catch (Exception ex)
+        {
+            // Optional: You can route this error to your SingleStatusText or BulkStatusText
+            Console.WriteLine($"Failed to open directory: {ex.Message}");
+        }
     }
 
     private static string GetAppDataFolder()
