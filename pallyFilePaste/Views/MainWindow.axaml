@@ -10,7 +10,7 @@
         Height="500"
         WindowStartupLocation="CenterScreen"
         Icon="/Assets/PallyPasteFile_desktopIcon.ico"
-        Title="pallyFilePaste">
+        Title="pally file paste">
     <Window.Styles>
         <!-- Normal icon color -->
         <Style Selector="Button#OpenFolderButton :is(path)[id=openFolderPath]">

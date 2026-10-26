@@ -9,12 +9,12 @@
     <AndroidApplicationDisplayVersion>1.2.0</AndroidApplicationDisplayVersion>
 
     <!-- Windows -->
-    <WindowsVersion>1.1.0</WindowsVersion>
-    <WindowsReleaseDate>2026-10-06</WindowsReleaseDate>
+    <WindowsVersion>1.2.0</WindowsVersion>
+    <WindowsReleaseDate>2026-10-26</WindowsReleaseDate>
 
     <!-- Linux -->
-    <LinuxVersion>1.1.0</LinuxVersion>
-    <LinuxReleaseDate>2026-10-05</LinuxReleaseDate>
+    <LinuxVersion>1.2.0</LinuxVersion>
+    <LinuxReleaseDate>2026-10-26</LinuxReleaseDate>
   </PropertyGroup>
 
   <!-- Android project -->
