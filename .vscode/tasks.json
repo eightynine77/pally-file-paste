@@ -27,6 +27,38 @@
             "problemMatcher": []
         },
         {
+            "label": "Build Avalonia Desktop",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "pallyFilePaste.Desktop/pallyFilePaste.Desktop.csproj"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Avalonia Android",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "pallyFilePaste.Android/pallyFilePaste.Android.csproj"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Project",
+            "type": "process",
+            "command": "dotnet",
+            "args": [
+                "build"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
             "label": "Start android emulator",
             "type": "process",
             "command": "emulator",
