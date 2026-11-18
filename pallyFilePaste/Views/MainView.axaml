@@ -69,7 +69,7 @@
                                     VerticalContentAlignment="Center"
                                     Height="150"
                                     Click="SinglePasteButton_Click">
-                                <TextBlock Text="click here to paste into image"
+                                <TextBlock Text="tap here to paste into image"
                                            TextWrapping="Wrap"
                                            TextAlignment="Center"
                                            FontSize="24" />
