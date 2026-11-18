@@ -17,6 +17,7 @@ namespace pallyFilePaste.Views;
 public partial class MainWindow : Window
 {
     private const string AppFolderName = "pallyFilePaste";
+
     private bool _isProcessingPaste = false;
 
     private const string SaveFolderFileName = "save-folder.txt";

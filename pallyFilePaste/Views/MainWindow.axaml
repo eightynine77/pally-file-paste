@@ -115,10 +115,13 @@
                             </g>
                         </svg>
 
-                        <TextBlock Text="open folder"
+                        <TextBlock Text="open pasted images"
                                    FontSize="16"
                                    x:Name="openFolderText"
                                    TextWrapping="Wrap"
+                                   ToolTip.Tip="open the folder where your images are pasted"
+                                   ToolTip.ShowDelay="500"
+                                   ToolTip.BetweenShowDelay="20"
                                    VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
