@@ -9,8 +9,8 @@
     <AndroidApplicationDisplayVersion>1.3.0</AndroidApplicationDisplayVersion>
 
     <!-- Windows -->
-    <WindowsVersion>1.2.0</WindowsVersion>
-    <WindowsReleaseDate>2026-10-26</WindowsReleaseDate>
+    <WindowsVersion>1.2.1</WindowsVersion>
+    <WindowsReleaseDate>2026-11-19</WindowsReleaseDate>
 
     <!-- Linux -->
     <LinuxVersion>1.2.0</LinuxVersion>
