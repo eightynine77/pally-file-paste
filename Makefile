@@ -1,4 +1,4 @@
-.PHONY: build buildandroid builddesk clean deskrun andrun linpubreg linpubunbun winpub64 winpub86 fresh
+.PHONY: build buildandroid builddesk clean deskrun andrun linpubbun linpubunbun winpub64 winpub86 fresh
 
 build:
 	dotnet build
